@@ -22,15 +22,19 @@ public class ClientDetailsServiceImpl implements ClientDetailsService {
 	public ClientDetails loadClientByClientId(String clientId) throws ClientRegistrationException {
 		// TODO Auto-generated method stub
 		ClientModel client = clientService.findByClientId(clientId);
-		String resourceIds = client.getResourceIds().stream().collect(Collectors.joining(","));
+		//String resourceIds = client.getResourceIds().stream().collect(Collectors.joining(","));
+		client.getScopes().forEach(s->{
+			System.out.println("sddd " + s);
+		});
+		
         String scopes = client.getScopes().stream().collect(Collectors.joining(","));
         String grantTypes = client.getAuthorizedGrantTypes().stream().collect(Collectors.joining(","));
         String authorities = client.getAuthorities().stream().collect(Collectors.joining(","));
-		BaseClientDetails base =  new BaseClientDetails(client.getClientId(), resourceIds, scopes, grantTypes, authorities);
+		BaseClientDetails base =  new BaseClientDetails(client.getClientId(), null, scopes, grantTypes, authorities);
         base.setClientSecret(client.getClientSecret());
         base.setAccessTokenValiditySeconds(client.getAccessTokenValiditySeconds().intValue());
         base.setRefreshTokenValiditySeconds(client.getRefreshTokenValiditySeconds().intValue());
-        base.setAdditionalInformation(client.getAdditionalInformations());
+        //base.setAdditionalInformation(client.getAdditionalInformations());
         base.setAutoApproveScopes(client.getScopes());
         return base;
 	}

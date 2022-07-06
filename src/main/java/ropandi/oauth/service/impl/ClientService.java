@@ -8,13 +8,14 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import ropandi.oauth.ClientModel;
 import ropandi.oauth.model.CredentialData;
 import ropandi.oauth.model.CredentialResponse;
 import ropandi.oauth.service.IClientService;
-
+@Service
 public class ClientService implements IClientService {
 
 	@Autowired
